@@ -9,7 +9,7 @@ export default function TabLayout() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName: string = "";
 
-          if (route.name === "home") {
+          if (route.name === "index") {
             iconName = focused ? "home" : "home";
           } else if (route.name === "Settings") {
             iconName = focused ? "settings" : "settings-outline";
@@ -32,7 +32,7 @@ export default function TabLayout() {
       })}
     >
       <Tabs.Screen
-        name="home"
+        name="index"
         options={{
           title: "Home",
         }}

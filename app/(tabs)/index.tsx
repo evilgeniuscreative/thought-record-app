@@ -71,7 +71,7 @@ export default function HomeScreen() {
     <ScrollView style={styles.container}>
       {rows.map((row, index) => (
         <View key={index} style={styles.row}>
-          <Text></Text>
+          <Text>Input your current situation</Text>
           <TextInput
             style={styles.input}
             placeholder="Intensity (1-100)"
@@ -146,7 +146,9 @@ export default function HomeScreen() {
           />
         </View>
       ))}
-      <Button title="Save Row" onPress={saveToFirebase} />
+      <View style={styles.topButton}>
+        <Button title="Save Row" onPress={saveToFirebase} />
+      </View>
       <Button title="Add New Row" onPress={addRow} />
     </ScrollView>
   );

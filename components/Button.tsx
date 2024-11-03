@@ -5,6 +5,7 @@ type Props = {
   label: string;
   theme?: "primary";
   title?: string;
+  bstyle?: any;
   onPress?: () => void;
 };
 
@@ -20,7 +21,6 @@ export default function Button({ label, theme, title, onPress }: Props) {
         <Pressable
           style={[styles.button, { backgroundColor: "#fff" }]}
           onPress={onPress}
-      
         >
           <FontAwesome
             name="picture-o"
