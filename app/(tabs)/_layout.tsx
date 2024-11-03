@@ -1,43 +1,64 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import Ionicons from "@expo/vector-icons/Ionicons";
-
-import { TabBarIcon } from "@/components/navigation/TabBarIcon";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 export default function TabLayout() {
   return (
     <Tabs
-      screenOptions={{
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName: string = "";
+
+          if (route.name === "home") {
+            iconName = focused ? "home" : "home";
+          } else if (route.name === "Settings") {
+            iconName = focused ? "settings" : "settings-outline";
+          } else if (route.name === "about") {
+            iconName = focused ? "info" : "info-outline";
+          } else if (route.name === "history") {
+            iconName = focused ? "history" : "history";
+          } else if (route.name === "settings") {
+            iconName = focused ? "settings" : "settings";
+          } else if (route.name === "profile") {
+            iconName = focused ? "person" : "person-outline";
+          }
+          return <MaterialIcons name={iconName} size={size} color={color} />;
+        },
         tabBarActiveTintColor: "#ffd33d",
+        tabBarInactiveTintColor: "gray",
         headerStyle: {
           backgroundColor: "#25292e",
         },
-        headerShadowVisible: false,
-        headerTintColor: "#fff",
-        tabBarStyle: {
-          backgroundColor: "#25292e",
-        },
-      }}
+      })}
     >
       <Tabs.Screen
         name="home"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="home" size={24} color={color} />
-          ),
         }}
       />
       <Tabs.Screen
         name="about"
         options={{
           title: "About",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "code-slash" : "code-slash-outline"}
-              color={color}
-            />
-          ),
+        }}
+      />
+      <Tabs.Screen
+        name="history"
+        options={{
+          title: "History",
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
         }}
       />
     </Tabs>
