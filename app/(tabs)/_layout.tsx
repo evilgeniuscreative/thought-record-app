@@ -10,17 +10,17 @@ export default function TabLayout() {
           let iconName: string = "";
 
           if (route.name === "index") {
+            iconName = focused ? "login" : "login";
+          } else if (route.name === "home") {
             iconName = focused ? "home" : "home";
-          } else if (route.name === "Settings") {
-            iconName = focused ? "settings" : "settings-outline";
           } else if (route.name === "about") {
-            iconName = focused ? "info" : "info-outline";
+            iconName = focused ? "info" : "info";
           } else if (route.name === "history") {
             iconName = focused ? "history" : "history";
+          } else if (route.name === "profile") {
+            iconName = focused ? "person" : "person";
           } else if (route.name === "settings") {
             iconName = focused ? "settings" : "settings";
-          } else if (route.name === "profile") {
-            iconName = focused ? "person" : "person-outline";
           }
           return <MaterialIcons name={iconName} size={size} color={color} />;
         },
@@ -33,6 +33,12 @@ export default function TabLayout() {
     >
       <Tabs.Screen
         name="index"
+        options={{
+          title: "Login",
+        }}
+      />
+      <Tabs.Screen
+        name="home"
         options={{
           title: "Home",
         }}

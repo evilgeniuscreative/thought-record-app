@@ -1,156 +1,25 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../src/firebase";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import React from "react";
 
-export default function HomeScreen() {
-  const [rows, setRows] = useState([
-    {
-      intensity1: "",
-      situation: "",
-      feeling: "",
-      whatHappened: "",
-      isHotThought: false,
-      confirmsThought: "",
-      contradictsThought: "",
-      intensity2: "",
-    },
-  ]);
-
-  const addRow = () => {
-    setRows([
-      ...rows,
-      {
-        intensity1: "",
-        situation: "",
-        feeling: "",
-        whatHappened: "",
-        isHotThought: false,
-        confirmsThought: "",
-        contradictsThought: "",
-        intensity2: "",
-      },
-    ]);
-  };
-
-  const saveToFirebase = async () => {
-    try {
-      const thoughtsRef = collection(db, "thoughtredcord");
-      for (const row of rows) {
-        await addDoc(thoughtsRef, {
-          ...row,
-          timestamp: new Date(),
-        });
-      }
-      // Clear form after saving
-      setRows([
-        {
-          intensity1: "",
-          situation: "",
-          feeling: "",
-          whatHappened: "",
-          isHotThought: false,
-          confirmsThought: "",
-          contradictsThought: "",
-          intensity2: "",
-        },
-      ]);
-    } catch (error) {
-      console.error("Error saving thoughts:", error);
-    }
+export default function index() {
+  const handleLogin = () => {
+    console.log("Login");
   };
 
   return (
-    <ScrollView style={styles.container}>
-      {rows.map((row, index) => (
-        <View key={index} style={styles.row}>
-          <Text>Input your current situation</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Intensity (1-100)"
-            keyboardType="numeric"
-            value={row.intensity1}
-            onChangeText={(text) => {
-              const newRows = [...rows];
-              newRows[index].intensity1 = text;
-              setRows(newRows);
-            }}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Situation"
-            value={row.situation}
-            onChangeText={(text) => {
-              const newRows = [...rows];
-              newRows[index].situation = text;
-              setRows(newRows);
-            }}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Feeling"
-            value={row.feeling}
-            onChangeText={(text) => {
-              const newRows = [...rows];
-              newRows[index].feeling = text;
-              setRows(newRows);
-            }}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="What happened?"
-            value={row.whatHappened}
-            onChangeText={(text) => {
-              const newRows = [...rows];
-              newRows[index].whatHappened = text;
-              setRows(newRows);
-            }}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Confirms thought?"
-            value={row.confirmsThought}
-            onChangeText={(text) => {
-              const newRows = [...rows];
-              newRows[index].confirmsThought = text;
-              setRows(newRows);
-            }}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Contradicts thought?"
-            value={row.contradictsThought}
-            onChangeText={(text) => {
-              const newRows = [...rows];
-              newRows[index].contradictsThought = text;
-              setRows(newRows);
-            }}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Intensity (1-100)"
-            keyboardType="numeric"
-            value={row.intensity2}
-            onChangeText={(text) => {
-              const newRows = [...rows];
-              newRows[index].intensity2 = text;
-              setRows(newRows);
-            }}
-          />
-        </View>
-      ))}
-      <View style={styles.topButton}>
-        <Button title="Save Row" onPress={saveToFirebase} />
+    <View>
+      <Text style={styles.header}>Login Page</Text>
+      <TextInput placeholder="Username" style={styles.input} />
+      <TextInput placeholder="Password" style={styles.input} />
+      <View style={styles.loginButton}>
+        <Button
+          title="Login"
+          onPress={() => {
+            handleLogin();
+          }}
+        />
       </View>
-      <Button title="Add New Row" onPress={addRow} />
-    </ScrollView>
+    </View>
   );
 }
 
@@ -159,16 +28,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  row: {
-    marginBottom: 16,
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 20,
   },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
+    marginHorizontal: 20,
+    marginVertical: 10,
     padding: 8,
-    marginBottom: 8,
   },
-  topButton: {
-    marginBottom: 16,
+  loginButton: {
+    marginTop: 25,
+    marginHorizontal: 20,
   },
 });
